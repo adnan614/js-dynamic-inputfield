@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dynamic Fields - Day #29</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <!-- include font awesome -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <h1>Dynamic Fields Javascript</h1>
+    <div style="width: 100%" class="int-group"></div>
+    <div>
+      <a href="#" class="add">Add more</a>
+      <p id="result"></p>
+    </div>
+    <script>
+      const addBtn = document.querySelector(".add");
+
+      const input = document.querySelector(".int-group");
+
+      addBtn.addEventListener("click", addInput);
+
+      function removeInput() {
+        this.parentElement.remove();
+      }
+
+      function addInput() {
+        const name = document.createElement("input");
+        name.type = "text";
+        name.placeholder = "enter name";
+
+        const email = document.createElement("input");
+
+        email.type = "radio";
+        email.name = "fruits";
+
+        const btn = document.createElement("a");
+        btn.className = "delete";
+        btn.innerText = "delete";
+
+        btn.addEventListener("click", removeInput);
+
+        let radioBtns = document.querySelectorAll("input[name='fruits']");
+        let result = document.getElementById("result");
+        // radioBtns.addEventListener("click", radioFruit);
+
+        let selected = () => {
+          var ele = document.getElementsByName("fruits");
+
+          for (i = 0; i === ele.length; i++) {
+            if (ele[i].checked) {
+              ele[i].value = "1";
+            } else {
+              ele[i].value = "0";
+            }
+          }
+        };
+
+        radioBtns.forEach((radioBtn) => {
+          radioBtn.addEventListener("change", selected);
+        });
+
+        const flex = document.createElement("div");
+        flex.className = "flex";
+
+        input.appendChild(flex);
+        flex.appendChild(name);
+        flex.appendChild(email);
+        flex.appendChild(btn);
+      }
+    </script>
+  </body>
+</html>
